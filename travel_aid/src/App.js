@@ -1,10 +1,13 @@
 import React from 'react';
+import Header from './Components/Header';
+import { CssBaseline } from '@mui/material';
 
 function App() {
   return (
-    <div> 
-        <h1>Hello World</h1>
-    </div>
+    <> 
+      <CssBaseline />
+      <Header />
+    </>
     
   );
 }
