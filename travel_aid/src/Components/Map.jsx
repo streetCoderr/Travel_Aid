@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 
 
 
-const MapContainer = styled('div') (({theme}) => ({
+const MapContainer = styled('div') (() => ({
   height: '85vh', width: '100%',
 }))
 const Map = () => {
