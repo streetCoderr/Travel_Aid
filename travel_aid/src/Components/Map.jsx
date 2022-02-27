@@ -7,21 +7,24 @@ import { styled } from '@mui/material/styles';
 const MapContainer = styled('div') (() => ({
   height: '85vh', width: '100%',
 }))
-const Map = () => {
-
-  const coordinates = {lat: 0, lng: 0}
+const Map = ({coords, setCoords, setBounds}) => {
   
   return (
     <MapContainer>
       <GoogleMapReact
         bootstrapURLKeys={{key: 'AIzaSyA9CaV35cYuJYbsGL5e9FNFj3lAZoMgiwY'}}
-        defaultCenter={coordinates}
-        center={coordinates}
+        defaultCenter={coords}
+        center={coords}
         defaultZoom={14}
         margin={[50, 50, 50, 50]}
         options={''}
-        onChange={''}
-        onChildClick={''}>
+        onChange={(e) => {
+          console.log(e)
+          setCoords({lat: e.center.lat, lng: e.center.lng})
+          setBounds({sw: e.bounds.sw, ne: e.bounds.ne})
+        }}
+        onChildClick={''}
+        >
 
       </GoogleMapReact>
     </MapContainer>

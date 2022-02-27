@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PlaceDetails from './PlaceDetails';
 import { Typography, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 import { styled } from '@mui/material/styles';
 
@@ -7,16 +8,8 @@ const FControl = styled(FormControl)(({theme}) => ({
     margin: theme.spacing(1), minWidth: 120, marginBottom: '30px',
   }))
 
-const places = [
-  {name: "Uche"},
-  {name: "Stephen"},
-  {name: "Marcel"},
-  {name: "Onyi"},
-]
 
-const List = () => {
-  const [type, setType] = useState('restaurants')
-  const [rating, setRating] = useState(0)
+const List = ( { places, type, setType, rating, setRating} ) => {
   return (
     <ListContainer>
         <Typography variant='h5'>Restaurants, Hotels and Attractions around you</Typography>
@@ -38,9 +31,8 @@ const List = () => {
             </Select>
         </FControl>
         {places?.map((place, i) => (
-          <h1 key={i}>{place.name}</h1>
+          <PlaceDetails key={i} place={place}/>
         ))}
-        
     </ListContainer>
   )
 }
