@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PlaceDetails from './PlaceDetails';
-import { Typography, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
+import { Typography, InputLabel, MenuItem, FormControl, Select, Grid } from '@mui/material'
 import { styled } from '@mui/material/styles';
 
 const ListContainer = styled('div')(({theme}) => ({padding: '25px',}))
@@ -13,7 +13,7 @@ const List = ( { places, type, setType, rating, setRating} ) => {
   return (
     <ListContainer>
         <Typography variant='h5'>Restaurants, Hotels and Attractions around you</Typography>
-        <FControl variant='standard' sx={{ m: 1, minWidth: 120 }}>
+        <FControl variant='standard'>
             <InputLabel id='type'>Type</InputLabel>
             <Select value={type} onChange={(e) => setType(e.target.value)} labelId='type' label="Type">
                 <MenuItem value='restaurants'>Restaurants</MenuItem>
@@ -21,7 +21,7 @@ const List = ( { places, type, setType, rating, setRating} ) => {
                 <MenuItem value='attractions'>Attractions</MenuItem>
             </Select>
         </FControl>
-        <FControl variant='standard' sx={{ m: 1, minWidth: 120 }}>
+        <FControl variant='standard'>
             <InputLabel id='rating'>Rating</InputLabel>
             <Select value={rating} onChange={(e) => setRating(e.target.value)} label="Rating">
                 <MenuItem value={0}>All</MenuItem>
@@ -30,9 +30,14 @@ const List = ( { places, type, setType, rating, setRating} ) => {
                 <MenuItem value={4.5}>Above 4.5</MenuItem>
             </Select>
         </FControl>
-        {places?.map((place, i) => (
-          <PlaceDetails key={i} place={place}/>
-        ))}
+        <Grid container spacing={3} sx={{ height: '75vh', overflow: 'auto'}}>
+          {places?.map((place, i) => (
+            <Grid key={i} item xs={12}>
+              <PlaceDetails key={i} place={place}/>
+            </Grid>
+          ))}
+        </Grid>
+        
     </ListContainer>
   )
 }

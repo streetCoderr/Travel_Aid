@@ -6,10 +6,10 @@ import PhoneIcon from '@mui/icons-material/Phone';
 
 const PlaceDetails = ({ place }) => {
   return (
-    <Card elevation={6} style={{marginBottom: 10}}>
+    <Card elevation={6}>
         <CardMedia
             style={{ height: 300 }}
-            image={place.photo ? place.photo.images.medium.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
+            image={place.photo ? place.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
             title={place.name}
       />
       <CardContent>
@@ -21,7 +21,7 @@ const PlaceDetails = ({ place }) => {
           <Box display="flex" justifyContent="space-between">
             <Typography component="legend">Price</Typography>
             <Typography gutterBottom variant="subtitle1">
-                {place.price_level}
+                {place.price}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between">

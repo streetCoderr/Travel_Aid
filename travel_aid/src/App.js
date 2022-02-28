@@ -22,10 +22,10 @@ function App() {
   useEffect(() => {
     getPlaces(type, bounds.sw, bounds.ne)
       .then((data) => {
-        console.log(data)
-        setPlaces(data.filter(place => place.name))
+        console.log({data})
+        setPlaces(data.filter(place => place.name && Number(place.rating) >= rating))
       })
-  }, [coords, bounds, type])
+  }, [coords, bounds, type, rating])
   
   return (
 
@@ -42,7 +42,7 @@ function App() {
             setRating={setRating}
           />
         </Grid>
-        <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center'}}>
+        <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <Map  
             coords={coords}
             setCoords={setCoords}
