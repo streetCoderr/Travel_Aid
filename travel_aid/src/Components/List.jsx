@@ -33,13 +33,12 @@ const List = ( { places, type, setType, rating, setRating, childClicked} ) => {
             </Select>
         </FControl>
         <Grid container spacing={3} sx={{ height: '75vh', overflow: 'auto'}}>
-          {places?.map((place, i) => (
+          {places?.map((place) => (
             <Grid key={place.location_id} item xs={12}>
               <PlaceDetails clicked={childClicked === place.location_id} place={place}/>
             </Grid>
           ))}
         </Grid>
-        
     </ListContainer>
   )
 }

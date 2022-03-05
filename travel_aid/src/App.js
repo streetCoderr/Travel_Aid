@@ -8,6 +8,7 @@ import { getPlaces } from './api/travelAdvisor';
 
 function App() {
   const [coords, setCoords] = useState({})
+  const [defCoords, setDefCoords] = useState({})
   const [places, setPlaces] = useState([])
   const [bounds, setBounds] = useState({})
   const [type, setType] = useState('restaurants')
@@ -17,6 +18,7 @@ function App() {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude} }) => {
       setCoords({lat: latitude, lng: longitude})
+      setDefCoords({lat: latitude, lng: longitude})
     })
   }, [])
 
@@ -29,7 +31,7 @@ function App() {
   
   return (
     <> 
-    
+
       <CssBaseline />
       <Header />
       <Grid container spacing={3} style={{ width: '100%' }}>
@@ -46,6 +48,7 @@ function App() {
         <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <Map  
             coords={coords}
+            defCoords={defCoords}
             setCoords={setCoords}
             setBounds={setBounds}
             places={places}
