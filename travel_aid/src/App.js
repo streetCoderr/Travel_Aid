@@ -42,7 +42,7 @@ function App() {
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           <List 
-            places={filteredPlaces}
+            places={ filteredPlaces }
             type={type}
             setType={setType}
             rating={rating}
@@ -56,7 +56,7 @@ function App() {
             defCoords={defCoords}
             setCoords={setCoords}
             setBounds={setBounds}
-            places={filteredPlaces}
+            places={ filteredPlaces }
             setChildClicked={setChildClicked}
           />
         </Grid>
