@@ -27,22 +27,23 @@ function App() {
     getPlaces(type, bounds.sw, bounds.ne)
       .then((data) => {
         setPlaces(data?.filter(place => place.name))
+        setFilteredPlaces([])
       })
-  }, [coords, bounds, type])
+  }, [bounds, type])
 
   useEffect(() => {
+    setFilteredPlaces([])
     setFilteredPlaces(places?.filter(place => Number(place.rating) >= rating))
   }, [places, rating])
   
   return (
     <> 
-
       <CssBaseline />
-      <Header />
+      <Header setCoords={setCoords}/>
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           <List 
-            places={ filteredPlaces }
+            places={filteredPlaces?.length ? filteredPlaces : places}
             type={type}
             setType={setType}
             rating={rating}
@@ -56,7 +57,7 @@ function App() {
             defCoords={defCoords}
             setCoords={setCoords}
             setBounds={setBounds}
-            places={ filteredPlaces }
+            places={filteredPlaces?.length ? filteredPlaces : places}
             setChildClicked={setChildClicked}
           />
         </Grid>

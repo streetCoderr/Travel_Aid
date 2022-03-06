@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PlaceDetails from './PlaceDetails';
 import { Typography, InputLabel, MenuItem, FormControl, Select, Grid } from '@mui/material'
 import { styled } from '@mui/material/styles';
