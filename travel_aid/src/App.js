@@ -10,6 +10,7 @@ function App() {
   const [coords, setCoords] = useState({})
   const [defCoords, setDefCoords] = useState({})
   const [places, setPlaces] = useState([])
+  const [filteredPlaces, setFilteredPlaces] = useState([])
   const [bounds, setBounds] = useState({})
   const [type, setType] = useState('restaurants')
   const [rating, setRating] = useState(0)
@@ -25,9 +26,13 @@ function App() {
   useEffect(() => {
     getPlaces(type, bounds.sw, bounds.ne)
       .then((data) => {
-        setPlaces(data?.filter(place => place.name && Number(place.rating) >= rating))
+        setPlaces(data?.filter(place => place.name))
       })
-  }, [coords, bounds, type, rating])
+  }, [coords, bounds, type])
+
+  useEffect(() => {
+    setFilteredPlaces(places?.filter(place => Number(place.rating) >= rating))
+  }, [places, rating])
   
   return (
     <> 
@@ -37,7 +42,7 @@ function App() {
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           <List 
-            places={places}
+            places={filteredPlaces}
             type={type}
             setType={setType}
             rating={rating}
@@ -51,7 +56,7 @@ function App() {
             defCoords={defCoords}
             setCoords={setCoords}
             setBounds={setBounds}
-            places={places}
+            places={filteredPlaces}
             setChildClicked={setChildClicked}
           />
         </Grid>
