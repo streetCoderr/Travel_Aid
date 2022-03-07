@@ -1,6 +1,6 @@
 import React from 'react'
 import PlaceDetails from './PlaceDetails';
-import { Typography, InputLabel, MenuItem, FormControl, Select, Grid } from '@mui/material'
+import { Typography, InputLabel, MenuItem, FormControl, Select, Grid, CircularProgress } from '@mui/material'
 import { styled } from '@mui/material/styles';
 
 const ListContainer = styled('div')(({theme}) => ({padding: '25px',}))
@@ -9,12 +9,17 @@ const FControl = styled(FormControl)(({theme}) => ({
   }))
 
 
-const List = ( { places, type, setType, rating, setRating, childClicked} ) => {
+const List = ( { places, type, setType, rating, setRating, childClicked, isLoading } ) => {
 
 
   return (
     <ListContainer>
         <Typography variant='h5'>Restaurants, Hotels and Attractions around you</Typography>
+        {isLoading?
+        (<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '600px'}}>
+          <CircularProgress size='5rem'/>
+        </div>) :
+        (<>
         <FControl variant='standard'>
             <InputLabel id='type'>Type</InputLabel>
             <Select value={type} onChange={(e) => setType(e.target.value)} labelId='type' label="Type">
@@ -39,6 +44,8 @@ const List = ( { places, type, setType, rating, setRating, childClicked} ) => {
             </Grid>
           ))}
         </Grid>
+        </>
+        )}
     </ListContainer>
   )
 }

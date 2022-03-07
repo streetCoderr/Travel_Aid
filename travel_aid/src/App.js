@@ -15,6 +15,7 @@ function App() {
   const [type, setType] = useState('restaurants')
   const [rating, setRating] = useState(0)
   const [childClicked, setChildClicked] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude} }) => {
@@ -24,16 +25,18 @@ function App() {
   }, [])
 
   useEffect(() => {
-    getPlaces(type, bounds.sw, bounds.ne)
+    if (bounds.sw && bounds.ne) {
+      setIsLoading(true)
+      getPlaces(type, bounds.sw, bounds.ne)
       .then((data) => {
         setPlaces(data?.filter(place => place.name))
-        setFilteredPlaces([])
       })
+    }
   }, [bounds, type])
 
   useEffect(() => {
-    setFilteredPlaces([])
     setFilteredPlaces(places?.filter(place => Number(place.rating) >= rating))
+    setIsLoading(false)
   }, [places, rating])
   
   return (
@@ -49,6 +52,7 @@ function App() {
             rating={rating}
             setRating={setRating}
             childClicked={childClicked}
+            isLoading={isLoading}
           />
         </Grid>
         <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
