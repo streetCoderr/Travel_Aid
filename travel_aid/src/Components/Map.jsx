@@ -3,6 +3,7 @@ import GoogleMapReact from 'google-map-react'
 import { styled } from '@mui/material/styles';
 import { Box, Paper, Rating, Typography, useMediaQuery } from '@mui/material';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import mapStyles from '../mapStyles';
 
 
 
@@ -15,13 +16,13 @@ const Map = ({coords, setCoords, setBounds, places, setChildClicked, defCoords})
   return (
     <MapContainer>
       <GoogleMapReact
-        bootstrapURLKeys={{key: 'AIzaSyDf8fvr-opKOyC71LyaRvU87cwJEMuYz-Q'}}
+        bootstrapURLKeys={{key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY}}
         defaultCenter={defCoords}
         center={coords}
         defaultZoom={14}
         yesIWantToUseGoogleMapApiInternals
         margin={[50, 50, 50, 50]}
-        options={''}
+        options={{disableDefaultUI: true, zoomControl:true, styles: mapStyles}}
         onChange={(e) => {
           setCoords({lat: e.center.lat, lng: e.center.lng})
           setBounds({sw: e.bounds.sw, ne: e.bounds.ne})

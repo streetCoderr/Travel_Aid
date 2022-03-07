@@ -27,6 +27,7 @@ function App() {
   useEffect(() => {
     if (bounds.sw && bounds.ne) {
       setIsLoading(true)
+
       getPlaces(type, bounds.sw, bounds.ne)
       .then((data) => {
         setPlaces(data?.filter(place => place.name))
